@@ -1,7 +1,9 @@
 from datetime import datetime
+
 from flask import Blueprint, render_template, request
 
 calculator_bp = Blueprint("calculator", __name__)
+
 
 @calculator_bp.route("/", methods=["GET"])
 def calculator():
@@ -19,7 +21,7 @@ def calculator():
             elif first_number < 0:
                 error = "Error: Cannot take square root of a negative number."
             else:
-                result = first_number ** 0.5
+                result = first_number**0.5
         else:
             if first_number is None or second_number is None:
                 error = "Please enter both numbers."
@@ -37,7 +39,7 @@ def calculator():
                         else:
                             result = first_number / second_number
                     elif operation == "power":
-                        result = first_number ** second_number
+                        result = first_number**second_number
                     elif operation == "modulus":
                         if second_number == 0:
                             error = "Error: Modulus by zero is not allowed."
@@ -54,5 +56,5 @@ def calculator():
         operation=operation,
         result=result,
         error=error,
-        current_year=current_year
+        current_year=current_year,
     )

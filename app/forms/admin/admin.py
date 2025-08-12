@@ -1,17 +1,17 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, SubmitField, TextAreaField
+from wtforms import PasswordField, StringField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 
-class ContactForm(FlaskForm):
-    name = StringField("Name", validators=[DataRequired(), Length(max=100)])
-    email = StringField("Email", validators=[DataRequired(), Email(), Length(max=120)])
-    message = TextAreaField("Message", validators=[DataRequired(), Length(max=2000)])
-    submit = SubmitField("Send Message")
+class AdminLoginForm(FlaskForm):
+    username = StringField(
+        "Username", validators=[DataRequired(), Length(min=3, max=30)]
+    )
+    password = PasswordField("Password", validators=[DataRequired(), Length(min=6)])
+    submit = SubmitField("Login")
 
 
-# Registration form for new users
-class RegisterForm(FlaskForm):
+class AdminRegisterForm(FlaskForm):
     username = StringField(
         "Username", validators=[DataRequired(), Length(min=3, max=30)]
     )

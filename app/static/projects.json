@@ -9,7 +9,7 @@
     "name": "Guess Number Game",
     "description": "Fun interactive game that tracks your guesses and scores.",
     "image": "images/guess_number.png",
-    "endpoint": "guess.guess_home"
+    "endpoint": "guess.guess_game"
   },
    {
     "name": "Calculator",
@@ -21,7 +21,7 @@
     "name": "Guess Number Game",
     "description": "Fun interactive game that tracks your guesses and scores.",
     "image": "images/guess_number.png",
-    "endpoint": "guess.guess_home"
+    "endpoint": "guess.guess_game"
   },
    {
     "name": "Calculator",
@@ -33,7 +33,7 @@
     "name": "Guess Number Game",
     "description": "Fun interactive game that tracks your guesses and scores.",
     "image": "images/guess_number.png",
-    "endpoint": "guess.guess_home"
+    "endpoint": "guess.guess_game"
   },
    {
     "name": "Calculator",

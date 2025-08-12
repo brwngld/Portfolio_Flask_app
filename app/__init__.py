@@ -8,6 +8,7 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_login import LoginManager
 from flask_mail import Mail
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 from config import Config
@@ -42,6 +43,9 @@ def create_app():
     )
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+    # Flask-Migrate
+    migrate = Migrate(app, db)
+
     # Flask-Mail config from environment
     app.config["MAIL_SERVER"] = "smtp.gmail.com"
     app.config["MAIL_PORT"] = 465
@@ -60,20 +64,29 @@ def create_app():
 
     # Import blueprints from routes/__init__.py
     from app.routes import auth_bp, calculator_bp, guess_bp, main_bp
+    from app.routes.admin.auth import admin_auth_bp
+    from app.routes.admin.dashboard import admin_bp
 
     # Register blueprints
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(calculator_bp, url_prefix="/calculator")
     app.register_blueprint(guess_bp, url_prefix="/guess")
+    app.register_blueprint(admin_bp)
+    app.register_blueprint(admin_auth_bp)
 
     return app
 
 
+from app.models.admin.admin import Admin
 # User loader for Flask-Login
 from app.models.user import User
 
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    admin = Admin.query.get(int(user_id))
+    if admin:
+        return admin
+    user = User.query.get(int(user_id))
+    return user

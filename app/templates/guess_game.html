@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Guess Game{% endblock %}
+{% block content %}
+<div class="container my-5 d-flex justify-content-center">
+    <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
+        <h2 class="mb-3 text-center text-primary"><i class="fas fa-gamepad me-2"></i>Guess the Number!</h2>
+        <form method="post" class="mb-3" aria-label="Guess the Number Game Form" action="{{ url_for('guess.guess_game') }}">
+            {% if form.csrf_token %}
+                {{ form.csrf_token }}
+            {% endif %}
+            <div class="mb-3">
+                <label for="difficulty" class="form-label">Select Difficulty</label>
+                <select name="difficulty" id="difficulty" class="form-select">
+                    <option value="easy" {% if difficulty == 'easy' %}selected{% endif %}>Easy (0-10)</option>
+                    <option value="medium" {% if difficulty == 'medium' %}selected{% endif %}>Medium (0-50)</option>
+                    <option value="hard" {% if difficulty == 'hard' %}selected{% endif %}>Hard (0-100)</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="guess" class="form-label">Your Guess</label>
+                <input type="number" name="guess" id="guess" class="form-control" min="0" max="{{ max_number }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100"><i class="fas fa-check"></i> Submit Guess</button>
+        </form>
+        {% if message %}
+            <div class="alert alert-info text-center">{{ message }}</div>
+        {% endif %}
+        {% if hint %}
+            <div class="alert alert-warning text-center"><i class="fas fa-lightbulb"></i> {{ hint }}</div>
+        {% endif %}
+        {% if tries_left is not none %}
+            <div class="text-center mt-2">
+                <span class="badge bg-secondary">Tries left: {{ tries_left }}</span>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

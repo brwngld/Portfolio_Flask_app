@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from flask_login import UserMixin
-from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import db
 
@@ -24,14 +23,10 @@ class User(UserMixin, db.Model):
     city = db.Column(db.String(80), nullable=False)
     address = db.Column(db.String(80), nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    is_admin = db.Column(db.Boolean, default=False, nullable=False)
+    is_approved = db.Column(db.Boolean, default=False, nullable=False)
 
     def __repr__(self):
         return f"<User {self.email}>"
 
-    def set_password(self, password: str):
-        """Hashes and stores the user's password."""
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self, password: str) -> bool:
-        """Validates the user's password."""
-        return check_password_hash(self.password_hash, password)
+    # Password logic handled in route, not in model

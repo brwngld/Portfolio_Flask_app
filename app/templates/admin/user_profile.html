@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>User Profile: {{ user.username }}</h2>
+    <div class="card mb-4">
+        <div class="card-body">
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>First Name:</strong> {{ user.first_name }}</p>
+            <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+            <p><strong>Number:</strong> {{ user.number }}</p>
+            <p><strong>Country:</strong> {{ user.country }}</p>
+            <p><strong>State:</strong> {{ user.state }}</p>
+            <p><strong>City:</strong> {{ user.city }}</p>
+            <p><strong>Address:</strong> {{ user.address }}</p>
+            <p><strong>Approved:</strong> {{ 'Yes' if user.is_approved else 'No' }}</p>
+            <p><strong>Admin:</strong> {{ 'Yes' if user.is_admin else 'No' }}</p>
+        </div>
+    </div>
+    <h4>Change Password</h4>
+    <form method="POST" action="{{ url_for('admin.change_password', user_id=user.id) }}">
+        <div class="mb-3">
+            <input type="password" name="new_password" class="form-control" placeholder="New Password" required>
+        </div>
+        <button type="submit" class="btn btn-warning">Change Password</button>
+    </form>
+    <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+</div>
+{% endblock %}
