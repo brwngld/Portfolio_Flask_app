@@ -32,6 +32,7 @@ def index():
 
     return render_template("index.html", projects=projects, current_year=current_year)
 
+
 @main.route("/about")
 def about():
     current_year = datetime.now().year

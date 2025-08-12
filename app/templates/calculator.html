@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Calculator{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4">Calculator</h2>
+    <form method="get" class="row g-3 align-items-center" aria-label="Calculator form">
+        <div class="col-auto">
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
+                <input type="number" name="first_number" step="any" class="form-control" value="{{ first_number }}" aria-label="First number" id="firstNumberInput">
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="input-group">
+                <span class="input-group-text">
+                    {% if operation == "add" %}
+                        <i class="fas fa-plus"></i>
+                    {% elif operation == "subtract" %}
+                        <i class="fas fa-minus"></i>
+                    {% elif operation == "multiply" %}
+                        <i class="fas fa-times"></i>
+                    {% elif operation == "divide" %}
+                        <i class="fas fa-divide"></i>
+                    {% elif operation == "power" %}
+                        <i class="fas fa-superscript"></i>
+                    {% elif operation == "modulus" %}
+                        <i class="fas fa-percent"></i>
+                    {% elif operation == "sqrt" %}
+                        <i class="fas fa-square-root-alt"></i>
+                    {% else %}
+                        <i class="fas fa-question"></i>
+                    {% endif %}
+                </span>
+                <select name="operation" class="form-select" aria-label="Operation">
+                    <option value="add" {% if operation == "add" %}selected{% endif %}>+ (Add)</option>
+                    <option value="subtract" {% if operation == "subtract" %}selected{% endif %}>- (Subtract)</option>
+                    <option value="multiply" {% if operation == "multiply" %}selected{% endif %}>× (Multiply)</option>
+                    <option value="divide" {% if operation == "divide" %}selected{% endif %}>÷ (Divide)</option>
+                    <option value="power" {% if operation == "power" %}selected{% endif %}>^ (Exponent)</option>
+                    <option value="modulus" {% if operation == "modulus" %}selected{% endif %}>% (Modulus)</option>
+                    <option value="sqrt" {% if operation == "sqrt" %}selected{% endif %}>√ (Square Root)</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
+                <input type="number" name="second_number" step="any" class="form-control" value="{{ second_number }}" aria-label="Second number">
+            </div>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-equals"></i> Calculate
+            </button>
+        </div>
+    </form>
+    {% if error %}
+        <div class="alert alert-danger mt-4">
+            <h4 class="mb-0">{{ error }}</h4>
+        </div>
+    {% elif result is not none %}
+        <div class="alert alert-info mt-4">
+            <h4 class="mb-0">Result: {{ result }}</h4>
+        </div>
+    {% endif %}
+</div>
+<script>
+    // Auto-focus on the first number input for better UX
+    document.addEventListener("DOMContentLoaded", function() {
+        var firstInput = document.getElementById("firstNumberInput");
+        if (firstInput) firstInput.focus();
+    });
+</script>
+{% endblock %}
