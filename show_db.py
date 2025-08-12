@@ -1,4 +1,5 @@
 import os
+
 import pymysql
 from dotenv import load_dotenv
 
@@ -10,9 +11,7 @@ MYSQL_HOST = os.getenv("MYSQL_HOST")
 
 # Connect to MySQL
 conn = pymysql.connect(
-    host=str(MYSQL_HOST),
-    user=str(MYSQL_USER),
-    password=str(MYSQL_PASSWORD)
+    host=str(MYSQL_HOST), user=str(MYSQL_USER), password=str(MYSQL_PASSWORD)
 )
 
 cur = conn.cursor()

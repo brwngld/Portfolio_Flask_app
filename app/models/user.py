@@ -1,13 +1,17 @@
-from app import db
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
 from datetime import datetime
+
+from flask_login import UserMixin
+from werkzeug.security import check_password_hash, generate_password_hash
+
+from app import db
+
 
 class User(UserMixin, db.Model):
     """
     Represents a registered user in the application.
     Includes authentication, profile details, and creation timestamp.
     """
+
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(80), nullable=False)
     last_name = db.Column(db.String(80), nullable=False)

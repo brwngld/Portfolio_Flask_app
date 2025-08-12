@@ -1,9 +1,12 @@
 # App/Utils/db_types.py
 import json
-from sqlalchemy.types import TypeDecorator, TEXT
+
+from sqlalchemy.types import TEXT, TypeDecorator
+
 
 class JsonEncodedDict(TypeDecorator):
     """Represents a Python dict as a JSON-encoded string in the DB."""
+
     impl = TEXT
 
     def process_bind_param(self, value, dialect):
