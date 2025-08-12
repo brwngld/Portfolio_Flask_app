@@ -1,0 +1,71 @@
+.env
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+ENV/
+env/
+myenv/
+GCI_University_College/myenv/
+Portfolio_Flask_app/env/
+GCI/myenv/
+GCI_University_College/myenv/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+notebooks/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Media and cache
+*.sqlite3
+*.db
+*.bak
+*.tmp
+thumnails/
+
+# Docker
+*.pid
+*.pid.lock
+docker/
+
+# Security: compiled files
+GCI_University_College/__pycache__/
+Portfolio_Flask_app/__pycache__/
+GCI/__pycache__/
+
+# Misc
+*.tar.gz
+*.zip
+*.rar
+
+# Node
+node_modules/
+
+# Test files
+*.test.py
+
+# Others
+refacer/demo.gif
+refacer/image.jpg
+refacer/inswapper_128.onnx

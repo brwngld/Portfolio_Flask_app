@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Calculator",
+    "description": "A sleek calculator app with validation and history, built with Flask.",
+    "image": "images/calculator.png",
+    "endpoint": "calculator.calculator"
+  },
+  {
+    "name": "Guess Number Game",
+    "description": "Fun interactive game that tracks your guesses and scores.",
+    "image": "images/guess_number.png",
+    "endpoint": "guess.guess_home"
+  },
+   {
+    "name": "Calculator",
+    "description": "A sleek calculator app with validation and history, built with Flask.",
+    "image": "images/calculator.png",
+    "endpoint": "calculator.calculator"
+  },
+  {
+    "name": "Guess Number Game",
+    "description": "Fun interactive game that tracks your guesses and scores.",
+    "image": "images/guess_number.png",
+    "endpoint": "guess.guess_home"
+  },
+   {
+    "name": "Calculator",
+    "description": "A sleek calculator app with validation and history, built with Flask.",
+    "image": "images/calculator.png",
+    "endpoint": "calculator.calculator"
+  },
+  {
+    "name": "Guess Number Game",
+    "description": "Fun interactive game that tracks your guesses and scores.",
+    "image": "images/guess_number.png",
+    "endpoint": "guess.guess_home"
+  },
+   {
+    "name": "Calculator",
+    "description": "A sleek calculator app with validation and history, built with Flask.",
+    "image": "images/calculator.png",
+    "endpoint": "calculator.calculator"
+  },
+  {
+    "name": "Coming Soon",
+    "description": "Under development",
+    "image": "images/coming_soon.png",
+    "endpoint": null
+  }
+]

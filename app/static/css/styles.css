@@ -1,0 +1,166 @@
+
+/* ========================= */
+/* 1. Custom Color Palette   */
+/* ========================= */
+:root {
+  --primary-color: #4F46E5;
+  --secondary-color: #22D3EE;
+  --text-color: #1F2937;
+  --bg-light: #F9FAFB;
+}
+
+/* ========================= */
+/* 2. Base Styles            */
+/* ========================= */
+body {
+  background-color: var(--bg-light);
+  color: var(--text-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* ========================= */
+/* 3. Layout & Utilities     */
+/* ========================= */
+.container {
+  max-width: 960px;
+}
+
+/* ========================= */
+/* 4. Components             */
+/* ========================= */
+/* Navbar */
+.navbar {
+  background-color: var(--primary-color);
+  padding: 0.75rem 1rem;
+}
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: 2px;
+  color: white !important;
+  transition: color 0.3s ease;
+}
+.navbar-brand:hover {
+  color: var(--secondary-color) !important;
+}
+.nav-link {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--secondary-color) !important;
+  border-bottom: 2px solid var(--secondary-color);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 0.35rem;
+  font-weight: 600;
+  padding: 0.55rem 1.5rem;
+  transition: background-color 0.3s ease;
+}
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+.btn-outline-primary {
+  border-radius: 50px;
+  padding: 0.6rem 1.8rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.btn-outline-primary:hover {
+  background-color: #4F46E5;
+  color: white;
+  border-color: #4F46E5;
+}
+
+/* Cards */
+.card {
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 12px rgba(79, 70, 229, 0.15);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  margin-bottom: 2rem;
+  padding: 1.25rem 1rem;
+}
+.card:hover {
+  box-shadow: 0 12px 24px rgba(34, 211, 238, 0.25);
+  transform: scale(1.03);
+  z-index: 2;
+}
+.card-title {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+.card-text {
+  color: var(--text-color);
+}
+
+/* Alerts */
+.alert {
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.alert .btn-close {
+  margin-left: 1rem;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 0.9rem;
+}
+.footer {
+  margin-top: 2rem;
+}
+
+/* ========================= */
+/* 5. Accessibility          */
+/* ========================= */
+.btn-primary:focus,
+.btn-outline-primary:focus,
+.nav-link:focus {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.25);
+}
+
+/* ========================= */
+/* 6. Responsive Styles      */
+/* ========================= */
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+  .card {
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 8px rgba(34, 211, 238, 0.15);
+    padding: 1rem 0.5rem;
+  }
+  .navbar-brand {
+    font-size: 1.25rem;
+  }
+  .card-title {
+    font-size: 1rem;
+  }
+  .card-text {
+    font-size: 0.9rem;
+  }
+}
