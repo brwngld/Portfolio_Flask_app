@@ -27,6 +27,19 @@
                     <form method="POST" action="{{ url_for('admin.approve_user', user_id=user.id) }}" style="display:inline;">
                         <button type="submit" class="btn btn-success btn-sm">Approve</button>
                     </form>
+                    {% else %}
+                    <form method="POST" action="{{ url_for('admin.disapprove_user', user_id=user.id) }}" style="display:inline;">
+                        <button type="submit" class="btn btn-warning btn-sm">Disapprove</button>
+                    </form>
+                    {% endif %}
+                    {% if not user.is_admin %}
+                    <form method="POST" action="{{ url_for('admin.make_admin', user_id=user.id) }}" style="display:inline;">
+                        <button type="submit" class="btn btn-secondary btn-sm">Make Admin</button>
+                    </form>
+                    {% else %}
+                    <form method="POST" action="{{ url_for('admin.dismiss_admin', user_id=user.id) }}" style="display:inline;">
+                        <button type="submit" class="btn btn-outline-secondary btn-sm">Dismiss Admin</button>
+                    </form>
                     {% endif %}
                     <form method="POST" action="{{ url_for('admin.delete_user', user_id=user.id) }}" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>

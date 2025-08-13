@@ -2,7 +2,7 @@ import os
 from urllib.parse import quote_plus
 
 from dotenv import load_dotenv
-from flask import Flask, app
+from flask import Flask, app, current_app, session
 from flask_bcrypt import Bcrypt
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -85,8 +85,8 @@ from app.models.user import User
 
 @login_manager.user_loader
 def load_user(user_id):
-    admin = Admin.query.get(int(user_id))
-    if admin:
-        return admin
-    user = User.query.get(int(user_id))
-    return user
+    user_type = session.get("user_type")
+    if user_type == "admin":
+        return Admin.query.get(int(user_id))
+    else:
+        return User.query.get(int(user_id))

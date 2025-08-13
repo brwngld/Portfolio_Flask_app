@@ -1,13 +1,36 @@
 from datetime import datetime
 
-from flask import Blueprint, flash, redirect, render_template, request, url_for
-from flask_login import login_required, login_user, logout_user
+from flask import (Blueprint, flash, redirect, render_template, request,
+                   session, url_for)
+from flask_login import current_user, login_required, login_user, logout_user
 
 from app import bcrypt, db
-from app.forms import RegisterForm
+from app.forms import ProfileForm, RegisterForm
 from app.models.user import User
 
 auth = Blueprint("auth", __name__)
+
+
+# Profile view and update
+@auth.route("/profile", methods=["GET", "POST"], endpoint="profile")
+@login_required
+def profile():
+    form = ProfileForm(obj=current_user)
+    current_year = datetime.now().year
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        current_user.first_name = form.first_name.data
+        current_user.last_name = form.last_name.data
+        current_user.number = form.number.data
+        current_user.country = form.country.data
+        current_user.state = form.state.data
+        current_user.city = form.city.data
+        current_user.address = form.address.data
+        db.session.commit()
+        flash("Profile updated successfully!", "success")
+        return redirect(url_for("auth.profile"))
+    return render_template("profile.html", form=form, current_year=current_year)
 
 
 @auth.route("/login", methods=["GET", "POST"])
@@ -24,11 +47,15 @@ def login():
     form = LoginForm()
     current_year = datetime.now().year
     if form.validate_on_submit():
+        from flask_login import logout_user
+
+        logout_user()  # Clear any previous session
         user = User.query.filter_by(username=form.username.data).first()
         from app import bcrypt
 
         if user and bcrypt.check_password_hash(user.password_hash, form.password.data):
             login_user(user)
+            session["user_type"] = "user"
             flash("Logged in successfully!", "success")
             if getattr(user, "is_admin", False):
                 return redirect(url_for("admin.dashboard"))
@@ -66,18 +93,18 @@ def register():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode(
             "utf-8"
         )
-    user = User()
-    user.username = form.username.data
-    user.email = form.email.data
-    user.password_hash = hashed_password
-    user.first_name = ""
-    user.last_name = ""
-    user.number = ""
-    user.country = ""
-    user.state = ""
-    user.city = ""
-    user.address = ""
-    user.is_approved = True
+        user = User()
+        user.username = form.username.data
+        user.email = form.email.data
+        user.password_hash = hashed_password
+        user.first_name = form.first_name.data
+        user.last_name = form.last_name.data
+        user.number = form.number.data
+        user.country = form.country.data
+        user.state = form.state.data
+        user.city = form.city.data
+        user.address = form.address.data
+        user.is_approved = True
         db.session.add(user)
         db.session.commit()
         flash(

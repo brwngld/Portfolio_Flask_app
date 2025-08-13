@@ -13,5 +13,9 @@ class Admin(UserMixin, db.Model):
     password_hash = db.Column(db.String(180), nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
+    @property
+    def is_admin(self):
+        return True
+
     def __repr__(self):
         return f"<Admin {self.email}>"

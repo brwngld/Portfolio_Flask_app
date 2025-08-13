@@ -1,4 +1,5 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import (Blueprint, flash, redirect, render_template, request,
+                   session, url_for)
 from flask_login import current_user, login_required, login_user, logout_user
 
 from app import bcrypt, db
@@ -12,11 +13,15 @@ admin_auth_bp = Blueprint("admin_auth", __name__, url_prefix="/admin")
 def admin_login():
     form = AdminLoginForm()
     if form.validate_on_submit():
+        from flask_login import logout_user
+
+        logout_user()  # Clear any previous session
         admin = Admin.query.filter_by(username=form.username.data).first()
         if admin and bcrypt.check_password_hash(
             admin.password_hash, form.password.data
         ):
             login_user(admin)
+            session["user_type"] = "admin"
             flash("Admin logged in successfully!", "success")
             return redirect(url_for("admin.dashboard"))
         else:
